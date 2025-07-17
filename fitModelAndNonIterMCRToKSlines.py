@@ -44,7 +44,7 @@ def fitModelAndNonIterMCRToKSlines(KS_acq, S1, S2, KS_lines,
 
     anim_frames = []
     if anim:
-        plt.ioff()
+        plt.ion()
         fig, axes = plt.subplots(2, 5, figsize=(10,6))
         gs = axes[0,0].get_gridspec()
         for ax in axes[:, :2].flatten():

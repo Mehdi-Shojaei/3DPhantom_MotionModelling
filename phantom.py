@@ -1,5 +1,5 @@
 import numpy as np
-from scipy import ndimage
+# from scipy import ndimage
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import os

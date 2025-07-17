@@ -44,9 +44,9 @@ def deformImWithModelAdjoint(I, R1, R2, s1, s2,
     Zg, Yg, Xg = np.meshgrid(def_zs, def_ys, def_xs, indexing='ij')
 
     # compute total displacements
-    TX = s1 * R1[Zg, Yg, Xg, 0] + s2 * R2[Zg, Yg, Xg, 0]
+    TX = s1 * R1[Zg, Yg, Xg, 2] + s2 * R2[Zg, Yg, Xg, 2]
     TY = s1 * R1[Zg, Yg, Xg, 1] + s2 * R2[Zg, Yg, Xg, 1]
-    TZ = s1 * R1[Zg, Yg, Xg, 2] + s2 * R2[Zg, Yg, Xg, 2]
+    TZ = s1 * R1[Zg, Yg, Xg, 0] + s2 * R2[Zg, Yg, Xg, 0]
 
     # warped floating-point coordinates
     def_X0 = Xg + TX

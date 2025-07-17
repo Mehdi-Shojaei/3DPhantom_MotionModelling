@@ -9,17 +9,17 @@ from deformImWithModel import deformImWithModel
 def simAcquireAllKSlines(I_ref, R1, R2, S1, S2, KS_lines, noise=0, anim=False, save=False):
     """
     Simulate acquiring k-space lines from a moving 2D object.
-    I_ref: 2D reference image (numpy or cupy array).
+    I_ref: 3D reference image (numpy or cupy array).
     R1, R2: motion model parameter fields (H x W x 2 arrays).
     S1, S2: surrogate signal arrays (length = number of lines).
     KS_lines: list of column indices (0-based) for each acquired line.
     noise: percent noise level in k-space.
     anim: if True, collect frames and save an animated GIF.
     Returns:
-      KS_acq: (H x N) complex array of acquired k-space lines
+      KS_acq: (D x H x N) complex array of acquired k-space lines
       frames: list of RGB uint8 arrays (each H x W x 3)
     """
-    framess = []
+    # framess = []
     D, H, W = I_ref.shape[:3]
     KS_idx = [int(x) for x in np.array(KS_lines).flatten()]
     N = len(KS_idx)
@@ -38,7 +38,7 @@ def simAcquireAllKSlines(I_ref, R1, R2, S1, S2, KS_lines, noise=0, anim=False, s
     frames = []
 
     if anim:
-        plt.ioff()
+        plt.ion()
         # plt.ion()
         fig, axes = plt.subplots(2, 2, figsize=(8, 8))
         ax1, ax2, ax3, ax4 = axes.flatten()
@@ -105,7 +105,7 @@ def simAcquireAllKSlines(I_ref, R1, R2, S1, S2, KS_lines, noise=0, anim=False, s
             ax4.axis('off')
 
             
-            framess.append(fig)
+            # framess.append(fig)
             
             if save:
                 os.makedirs('frames', exist_ok=True)

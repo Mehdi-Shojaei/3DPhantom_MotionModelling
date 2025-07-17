@@ -4,8 +4,8 @@ from scipy import ndimage
 def deformImWithModel(I_ref, R1, R2, s1, s2, def_xs=None, def_ys=None, def_zs=None):
     """
     Deform image I_ref using motion model (R1, R2) and surrogate signals (s1, s2).
-    def_xs, def_ys: optional sequences of x and y indices specifying a sub-region to deform (if provided, must specify both).
-    Returns: (I_def, T_X, T_Y) - the deformed image and displacement fields in X and Y.
+    def_xs, def_ys, def_zs: optional sequences of x, y, and z indices specifying a sub-region to deform (if provided, must specify all).
+    Returns: (I_def, T_X, T_Y, T_Z) - the deformed image and displacement fields in X, Y, and Z.
     """
     
     D, H, W = I_ref.shape[:3]
@@ -25,12 +25,12 @@ def deformImWithModel(I_ref, R1, R2, s1, s2, def_xs=None, def_ys=None, def_zs=No
     Zg, Yg, Xg = np.meshgrid(def_zs, def_ys, def_xs, indexing='ij') 
     
     # sample the motion fields
-    T_X = (s1 * R1[Zg, Yg, Xg, 0] +
-           s2 * R2[Zg, Yg, Xg, 0])
+    T_X = (s1 * R1[Zg, Yg, Xg, 2] +
+           s2 * R2[Zg, Yg, Xg, 2])
     T_Y = (s1 * R1[Zg, Yg, Xg, 1] +
            s2 * R2[Zg, Yg, Xg, 1])
-    T_Z = (s1 * R1[Zg, Yg, Xg, 2] +
-           s2 * R2[Zg, Yg, Xg, 2])
+    T_Z = (s1 * R1[Zg, Yg, Xg, 0] +
+           s2 * R2[Zg, Yg, Xg, 0])
     
     
     # 3) compute deformed coordinates

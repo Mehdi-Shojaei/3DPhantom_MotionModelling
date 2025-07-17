@@ -16,7 +16,7 @@ def save_animation(anim_mov_acq, output_path='anim.mp4', fps=10, dpi=300):
         output_path (str): Path to save the animation MP4.
         fps (int): Frames per second.
         dpi (int): Dots per inch for video quality.
-        save (bool): Whether to save the animation or not.
+        
     """
 
     fig, ax = plt.subplots()
